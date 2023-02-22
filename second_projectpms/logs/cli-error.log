@@ -1,0 +1,58 @@
+2023-01-31 12:59:06 error: [Cake\Database\Exception\DatabaseException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'Assignment5.product' doesn't exist in /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php on line 160
+Stack Trace:
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:118
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/ORM/Table.php:521
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:111
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:94
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/AllCommand.php:115
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/BaseCommand.php:189
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:334
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:172
+- /var/www/html/assignment5/bin/cake.php:12
+
+Caused by: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'Assignment5.product' doesn't exist in /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php on line 39
+Stack Trace:
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php:39
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Connection.php:329
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Core/Retry/CommandRetry.php:70
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Connection.php:332
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:158
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:118
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/ORM/Table.php:521
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:111
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:94
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/AllCommand.php:115
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/BaseCommand.php:189
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:334
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:172
+- /var/www/html/assignment5/bin/cake.php:12
+
+2023-01-31 13:21:21 error: [Cake\Database\Exception\DatabaseException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'Assignment5.product_c_ategories' doesn't exist in /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php on line 160
+Stack Trace:
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:118
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/ORM/Table.php:521
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:111
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:94
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/AllCommand.php:115
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/BaseCommand.php:189
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:334
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:172
+- /var/www/html/assignment5/bin/cake.php:12
+
+Caused by: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'Assignment5.product_c_ategories' doesn't exist in /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php on line 39
+Stack Trace:
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php:39
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Connection.php:329
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Core/Retry/CommandRetry.php:70
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Connection.php:332
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:158
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Database/Schema/Collection.php:118
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/ORM/Table.php:521
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:111
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/ModelCommand.php:94
+- /var/www/html/assignment5/vendor/cakephp/bake/src/Command/AllCommand.php:115
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/BaseCommand.php:189
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:334
+- /var/www/html/assignment5/vendor/cakephp/cakephp/src/Console/CommandRunner.php:172
+- /var/www/html/assignment5/bin/cake.php:12
+

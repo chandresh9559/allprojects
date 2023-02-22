@@ -1,0 +1,203 @@
+.user_img{
+  height: 130px;
+  width: 170px;
+  margin-left: 20px;
+}
+
+.edit_img{
+  height: 160px;
+  width: 190px;
+  margin-left: 20px;
+  border: 1px solid rgb(243, 235, 235);
+  border-radius: 40%;
+  padding: 10px;
+}
+
+.user_profile{
+  width: 200px;
+}
+
+/* profile css */
+
+
+
+/* .card {
+  width: 350px;
+  background-color: #efefef;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin-top: 70px;
+}  */
+.image img {
+  transition: all 0.5s
+}
+
+.card:hover .image img {
+  transform: scale(1.5)
+}
+/*
+
+.image img {
+  transition: all 0.5s
+}
+
+.card:hover .image img {
+  transform: scale(1.5)
+}
+
+.btn {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%
+}
+*/
+.name {
+  font-size: 18px;
+  font-weight: bold
+} 
+
+.idd {
+  font-size: 24px;
+  font-weight: 600
+}
+
+.idd1 {
+  font-size: 22px
+}
+
+.number {
+  font-size: 28px;
+  font-weight: bold
+}
+
+.follow {
+  font-size: 22px;
+  font-weight: 500;
+  color: #444444
+}
+
+.error-message{
+  color: red;
+}
+
+.error{
+  color: red;
+}
+.btn1 {
+  height: 40px;
+  width: 150px;
+  border: none;
+  background-color: #000;
+  color: #aeaeae;
+  font-size: 15px
+}
+
+.text span {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500
+}
+
+.icons i {
+  font-size: 19px
+}
+
+hr .new1 {
+  border: 1px solid
+}
+
+
+.date {
+  background-color: #ccc
+} 
+
+.product_image{
+  height: 170px;
+  width: 170px;
+}
+
+
+/* Flash messages */
+.message {
+  padding: 1rem;
+
+  background: #eff8ff;
+  color: #2779bd;
+
+  border-color: #6cb2eb;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  /* margin-left: 300px;
+  margin-top: 100px;
+  margin-bottom: 2rem; */
+  position: static;
+  top: 100px;
+  left: 300px;
+}
+.message.hidden {
+  display: none;
+}
+.message.success {
+  background: #e3fcec;
+  color: #1f9d55;
+  border-color: #51d88a;
+  margin-top: 120px;
+  margin-left: 300px;
+  width: 50%;
+}
+.message.warning {
+  background: #fffabc;
+  color: #8d7b00;
+  border-color: #d3b800;
+}
+.message.error {
+  background: #fcebea;
+  color: #cc1f1a;
+  border-color: #ef5753;
+  margin-top: 120px;
+  margin-left: 300px;
+  width: 50%;
+}
+
+.product-img{
+
+  margin-right:100px;
+  height: 260px;
+  width: 280px;
+  padding: 10px;
+  
+}
+
+
+.fa-eye{
+  color: blue;
+}
+.fa-trash{
+  color: red;
+}
+body
+{
+  counter-reset: Serial;          
+}
+
+table
+{
+  border-collapse: separate;
+}
+
+tr td:first-child:before
+{
+counter-increment: Serial;      
+content: counter(Serial) ". "; 
+}
+
+table tr td{
+  padding: 10px;
+}
+
+/* active link */
+
+
+
