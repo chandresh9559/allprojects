@@ -1,16 +1,84 @@
-var ck = $.noConflict();
-ck(document).ready(function () {
+$(document).ready(function () {
+    
+    $('.cart-increase').on('click',function(){
+        var id = $(this).attr("data-id");
+        // alert(id);return false;
+        $.ajax({
+            url:"/users/increase",
+            type:"json",
+            method:"get",
+            data:{'id':id},
+            success:function(response){
+ 
+             if(response == 'increased'){
+                 
+                 $('#cart-section').load('/users/cart' ,'#cart-section');
+                 
+             }else{
+                alert("Somthing wrong");
+             }
+              
+            }
+         });
 
-    ck('.filter').on('change',function(){
+    });
+    $('.cart-decrease').on('click',function(){
+        var id = $(this).attr("data-id");
+        // alert(id);return false;
+        $.ajax({
+            url:"/users/decrease",
+            type:"json",
+            method:"get",
+            data:{'id':id},
+            success:function(response){
+ 
+             if(response == 'require'){
+                alert("Number of products should not be less than one");
+                
+            }
+            if(response == 'decreased'){
+                
+                $('#cart-section').load('/users/cart' ,'#cart-section');
+            }else{
+
+                alert("Somthing wrong");
+            }
+              
+            }
+         });
+
+    });
+    $('.cart-delete').on('click',function(){
+        var id = $(this).attr("cart-data");
+        // alert('#cart'+id);
+        // return false;
+        $.ajax({
+           url:"/users/delete-cart",
+           type:"json",
+           method:"get",
+           data:{'id':id},
+           success:function(response){
+
+            if(response == 'deleted'){
+                
+                $('#rows'+id).hide();
+                
+            }
+             
+           }
+        });
+    });
+
+    $('.filter').on('change',function(){
        
-        var id = ck(this).val();
-        ck.ajax({
+        var id = $(this).val();
+        $.ajax({
             url:'/users/products',
             type:'JSON',
             method:'get',
             data:{'category_id':id},
             success: function(response){
-             ck('.table-responsive').html(response);
+             $('.table-responsive').html(response);
             }
         })
     });
@@ -18,8 +86,8 @@ ck(document).ready(function () {
   
 
 
-    var slider = ck("#slider");
-    var thumb = ck("#thumb");
+    var slider = $("#slider");
+    var thumb = $("#thumb");
     var slidesPerPage = 4; //globaly define number of elements per page
     var syncedSecondary = true;
     slider.owlCarousel({
@@ -78,22 +146,22 @@ ck(document).ready(function () {
     }
     thumb.on("click", ".owl-item", function (e) {
         e.preventDefault();
-        var number = ck(this).index();
+        var number = $(this).index();
         slider.data('owl.carousel').to(number, 300, true);
     });
 
 
-    ck(".qtyminus").on("click", function () {
-        var now = ck(".qty").val();
-        if (ck.isNumeric(now)) {
+    $(".qtyminus").on("click", function () {
+        var now = $(".qty").val();
+        if ($.isNumeric(now)) {
             if (parseInt(now) - 1 > 0) { now--; }
-            ck(".qty").val(now);
+            $(".qty").val(now);
         }
     })
-    ck(".qtyplus").on("click", function () {
-        var now = ck(".qty").val();
-        if (ck.isNumeric(now)) {
-            ck(".qty").val(parseInt(now) + 1);
+    $(".qtyplus").on("click", function () {
+        var now = $(".qty").val();
+        if ($.isNumeric(now)) {
+            $(".qty").val(parseInt(now) + 1);
         }
     });
 
@@ -101,7 +169,7 @@ ck(document).ready(function () {
    
 
     
-    ck('#comment').validate({
+    $('#comment').validate({
         rules: {
 
             comment: {
@@ -123,4 +191,24 @@ ck(document).ready(function () {
 
         }
     });
+
+//     $('.like').on('cli$',function(e){
+//         e.preventDefault();
+//         var product_id = $(this).attr('id');
+//         alert(product_id);
+
+//         $.ajax({
+//             url:'/users/like/'+product_id,
+//             type:'JSON',
+//             method:'POST',
+            
+//             success: function(response){
+//                 alert("ufhe");
+//             }
+//         })
+//    });
+
+
+   
+
 });

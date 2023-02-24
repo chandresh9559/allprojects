@@ -92,3 +92,7 @@ define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'c
  */
 define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
+
+defined("VENDOR_PATH") || define('VENDOR_PATH', ROOT . DS . 'vendor');
+defined("STRIPE_KEY") || define('STRIPE_KEY', "pk_test_MaQhP2b8XqG9R7PTL6VUmipt");
+defined("STRIPE_SECRET") || define('STRIPE_SECRET', "sk_test_MtVxg0tJfCGJXQY8xZlu69Ie");

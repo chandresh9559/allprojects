@@ -49,6 +49,13 @@ class UsersTable extends Table
         $this->hasMany('Products', [
             'foreignKey' => 'user_id',
         ]);
+
+        $this->hasMany('Cart', [
+            'foreignKey' => 'user_id',
+        ]);
+        $this->hasMany('LikeDislike', [
+            'foreignKey' => 'user_id',
+        ]);
         // $this->hasOne('UserProfile', [
         //     'foreignKey' => 'user_id',['dependent'=>true],
         // ]);

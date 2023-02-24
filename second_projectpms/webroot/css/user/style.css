@@ -1259,7 +1259,17 @@ label {
   line-height: normal;
 }
 
+.cart-img{
+  height: 100px;
+  width: 100px;
+}
+.minus{
+  margin-right: 10px;
+}
 
+.plus{
+  margin-left: 10px;
+}
 /* http://kute-themes.com/html/boutique/html/index.html
 https://template.hasthemes.com/noraure/noraure/index.html
 https://preview.hasthemes.com/xoss-preview/xoss/index.html */

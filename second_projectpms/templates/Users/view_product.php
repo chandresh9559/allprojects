@@ -112,9 +112,20 @@
 						<input type="text" name="quantity" value="1" class="qty">
 						<div class="qtyplus">+</div>
 					</form>
-					<a href="#" class="btn btn-warning mt-4">Add to Cart</a>
+					<?php echo $this->Html->link(__('Add to Cart'),['controller'=>'users','action'=>'cart-details',$product->id],['class'=>'btn btn-warning mt-4'])?>
 					<a href="#" class="btn btn-danger mt-4">Buy Now</a>
 				</div>
+				<?php $like = 0; $dislike = 0; foreach($product->like_dislike as $reaction){
+				   $like += $reaction->promote;
+				   $dislike += $reaction->demote;
+				}
+				?>
+				<div class="reaction mt-4">
+					<?php echo $this->Html->link(__('<i class="fa fa-thumbs-up" style="font-size:36px"></i>'),['controller'=>'users','action'=>'like',$product->id],['escape'=>false]),$like?>
+					<?php echo $this->Html->link(__('<i class="fa fa-thumbs-down" style="font-size:36px"></i>'),['controller'=>'users','action'=>'dislike',$product->id],['escape'=>false]),$dislike?>
+					
+				</div>
+				
 			</div>
 		</div>
 	</div>

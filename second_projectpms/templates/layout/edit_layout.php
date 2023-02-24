@@ -88,7 +88,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     //    'user/custom',
         // 'user/jquery-3.4.1.min',
         // 'user/bootstrap',
-        // 'user/custom',
         // 'user/popper.min',
 
     ]);

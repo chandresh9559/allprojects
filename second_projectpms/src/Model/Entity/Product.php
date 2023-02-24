@@ -38,6 +38,7 @@ class Product extends Entity
         'product_title' => true,
         'product_description' => true,
         'product_image' => true,
+        'product_images' => true,
         'product_tags' => true,
         'status' => true,
         'created_date' => true,
@@ -45,5 +46,6 @@ class Product extends Entity
         'product_categories' => true,
         'product_comment' => true,
         'users' => true,
+        'cart' => true,
     ];
 }

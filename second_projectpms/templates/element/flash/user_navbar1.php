@@ -17,7 +17,7 @@
                      <?php echo $this->Html->image($user->image,['class'=>'profile'])?>
                      <?php echo $this->Html->link(_($user->email),['controller'=>'Users','action'=>'view',$user->id]);?>
                   </li>
-                  
+                  <li class="nav-item"><?= $this->Html->link(__('Cart'), ['controller'=>'Users','action' => 'cart'],['class'=>'nav-link']) ?></li>
                </ul>
             </div>
        </nav>

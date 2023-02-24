@@ -1,7 +1,7 @@
 var ck = $.noConflict();
 ck(document).ready(function () {
 
-   
+   alert("jkgfd");
     jQuery.validator.addMethod("regex", function (value, element, param) { return value.match(new RegExp("^" + param + "$")); });
     var ALPHA_REGEX = "[a-zA-Z]*";
     // var Reg1 = '/[A-Z]/';
@@ -208,5 +208,10 @@ ck(document).ready(function () {
             },
 
         }
-    })
+    });
+
+    $('#like').on('click',function(){
+         var product_id = $(this).val();
+         alert(product_id);
+    });
 });

@@ -20,6 +20,8 @@ class UsersController extends AppController
         $this->Model = $this->loadModel('ProductComment');
         $this->Model = $this->loadModel('ProductCategories');
         $this->Model = $this->loadModel('Users');
+        $this->Model = $this->loadModel('Cart');
+        $this->Model = $this->loadModel('LikeDislike');
     }
     
 
@@ -339,15 +341,13 @@ class UsersController extends AppController
         $uid=$user->id;
         if($user->user_type == 0){
             // $result = $this->ProductComment->find('all')->where(['id'=>$id,'user_id'=>$uid])->first();
-            // dd($result);
             $username = $this->Users->get($uid, [
                 'contain' => ['UserProfile'],
             ]);
         // dd($user->email);
             $product = $this->Products->get($id, [
-                'contain' => ['ProductComment','ProductCategories'],
+                'contain' => ['ProductComment','ProductCategories','LikeDislike'],
             ]);
-            
             $comment = $this->ProductComment->newEmptyEntity();
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $user = $this->Authentication->getIdentity();
@@ -374,12 +374,227 @@ class UsersController extends AppController
 
     //============================================//
 
-    // function to send email for reset password
+    // function to list cart details
     public function cart(){
 
         $this->viewBuilder()->setLayout('my_layout');
         $user = $this->Authentication->getIdentity();
+        $id = $user->id;
         $this->set(compact('user'));
+        // $details = $this->Cart->get($id);
+        $details = $this->Cart->find('all')->contain(['Users','Products'])->where(['user_id'=>$id])->all();
+        //dd($details);
+        $dearray = array();
+        foreach($details as $detail){
+            $dearray[] =+ $detail->items;
+        }
+       
+        // $product = $this->Cart->find('all');
+        
+        $this->set(compact('details','user','dearray'));
     }
+
+    // function to add product in cart
+    public function cartDetails($id=null){
+        $user = $this->Authentication->getIdentity();
+        if($user){
+           $carts = $this->paginate($this->Cart);
+           foreach($carts as $cart){
+            if($cart->user_id == $user->id && $cart->product_id == $id){
+               $this->Flash->error(__('The product have already save in your cart'));
+               return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+            }
+           }
+
+           $cart = $this->Cart->newEmptyEntity();
+           $cart->user_id = $user->id;
+           $cart->product_id = $id;
+           if($this->Cart->save($cart)){
+              $this->Flash->success(__('Product has been saved in your cart'));
+              return $this->redirect(['controller'=>'users','action'=>'cart']);
+           }
+        }
+    }
+
+    // function to like a product
+    public function like($id=null){
+
+        $user = $this->Authentication->getIdentity();
+       if($user){
+            $like = $this->LikeDislike->find('all')->where(['user_id'=>$user->id,'product_id'=>$id])->all();
+            $likearray = array();
+            foreach($like as $like){
+                $likearray[]  += $like->items;
+            }
+
+            if(!empty($likearray)){
+                $promote = $this->LikeDislike->find('all')->where(['user_id'=>$user->id,'product_id'=>$id])->first();
+                if($promote->promote == 1){
+                    $promote = $this->LikeDislike->patchEntity($promote,$this->request->getData());
+                    $promote->promote = 0;
+                    $promote->demote = 0;
+
+                    if($this->LikeDislike->save($promote)){
+                        $this->Flash->success(__('Liked'));
+                        return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+
+                    }else{
+                        $this->Flash->error(__('not liked'));
+
+                    }
+
+                    
+                }else{
+                    $promote = $this->LikeDislike->patchEntity($promote,$this->request->getData());
+                    $promote->promote = 1;
+                    $promote->demote = 0;
+                    
+                    if($this->LikeDislike->save($promote)){
+                        $this->Flash->success(__('Liked'));
+                        return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+
+                    }else{
+                        $this->Flash->error(__('not liked'));
+
+                    }
+                }
+            }
+
+            $reaction = $this->LikeDislike->newEmptyEntity();
+            $reaction->user_id = $user->id;
+            $reaction->product_id = $id;
+            $reaction->promote = 1;
+            if($this->LikeDislike->save($reaction)){
+                $this->Flash->success(__('Liked'));
+                return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+            }else{
+                $this->Flash->error(__('not liked'));
+            }
+       }else{
+
+           $this->Flash->error(__('try again'));
+           return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+       }
+    }
+
+    // function to dislike
+    public function dislike($id=null){
+        $user = $this->Authentication->getIdentity();
+       if($user){
+            $like = $this->LikeDislike->find('all')->where(['user_id'=>$user->id,'product_id'=>$id])->all();
+            $likearray = array();
+            foreach($like as $like){
+                $likearray[]  += $like->items;
+            }
+
+            if(!empty($likearray)){
+                $promote = $this->LikeDislike->find('all')->where(['user_id'=>$user->id,'product_id'=>$id])->first();
+                if($promote->demote == 1){
+                    $promote = $this->LikeDislike->patchEntity($promote,$this->request->getData());
+                    $promote->promote = 0;
+                    $promote->demote = 0;
+
+                    if($this->LikeDislike->save($promote)){
+                        $this->Flash->success(__('Liked'));
+                        return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+
+                    }else{
+                        $this->Flash->error(__('not liked'));
+
+                    }
+
+                    
+                }else{
+                    $promote = $this->LikeDislike->patchEntity($promote,$this->request->getData());
+                    $promote->promote = 0;
+                    $promote->demote = 1;
+                    
+                    if($this->LikeDislike->save($promote)){
+                        $this->Flash->success(__('Liked'));
+                        return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+
+                    }else{
+                        $this->Flash->error(__('not liked'));
+
+                    }
+                }
+            }
+
+            $reaction = $this->LikeDislike->newEmptyEntity();
+            $reaction->user_id = $user->id;
+            $reaction->product_id = $id;
+            $reaction->demote = 1;
+            if($this->LikeDislike->save($reaction)){
+                $this->Flash->success(__('Liked'));
+                return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+            }else{
+                $this->Flash->error(__('not liked'));
+            }
+       }else{
+
+           $this->Flash->error(__('try again'));
+           return $this->redirect(['controller'=>'users','action'=>'view-product',$id]);
+       }
+    }
+
+    // function to increase product quantity
+    public function increase($id=null){
+        if($this->request->is('ajax')){
+            $this->autoRender = false;
+            $id = $_GET['id'];
+            $cart = $this->Cart->get($id);
+            $cart->quantity = $cart->quantity + 1;
+
+            if($this->Cart->save($cart)){
+                // $this->Flash->success(__('increases'));
+                //return $this->redirect(['controller'=>'users','action'=>'cart']);
+                echo "increased";
+            }else{
+                // $this->Flash->error(__('Not increase'));
+                echo "decreased";
+            }
+        }
+    }
+
+    // function to decrease product quantity
+    public function decrease($id=null){
+
+        if($this->request->is('ajax')){
+            $this->autoRender = false;
+            $id = $_GET['id'];
+            $cart = $this->Cart->get($id);
+            // dd($cart->quantity);
+        
+            if($cart->quantity == 1){
+                // $this->Flash->error(__('at least one quantity should be present'));
+                // return $this->redirect(['controller'=>'users','action'=>'cart']);
+                echo "require";
+            }
+            $cart->quantity = $cart->quantity - 1;
+
+            if($this->Cart->save($cart)){
+                // $this->Flash->success(__('decreased'));
+                echo "decreased";
+                // die;
+            // return $this->redirect(['controller'=>'users','action'=>'cart']);
+            }else{
+                // $this->Flash->error(__('Not decreased'));
+                echo "notdecreases";
+            }
+        }
+    }
+
+    public function deleteCart(){
+        $this->autoRender = false;
+        $id = $_GET['id'];
+        $cart = $this->Cart->get($id);
+        if($this->Cart->delete($cart)){
+            echo "deleted"; 
+        }else{
+            echo "failed";
+        }
+    }
+
+
 
 }
